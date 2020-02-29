@@ -11,8 +11,10 @@ public class ListPhotos {
     @SerializedName("page")
     @Expose
     public Integer page;
+    @SerializedName("photo")
+    @Expose
+    public List<Photo> photo = new ArrayList<>();
 
-    public List<Photo> photoList = new ArrayList<>();
     public  class  Photo {
 
         @SerializedName("farm")

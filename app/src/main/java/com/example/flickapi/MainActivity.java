@@ -40,7 +40,7 @@ public class MainActivity extends AppCompatActivity {
                     return;
                 } else {
                     ListPhotos listPhoto = response.body();
-                    List<ListPhotos.Photo> photos = listPhoto.photoList;
+                    List<ListPhotos.Photo> photos = listPhoto.photo;
                     for (ListPhotos.Photo photo : photos) {
                         String urlPhoto = "https://farm" + photo.farmId + ".staticflickr.com/"
                                 + photo.serverId + "/" + photo.photoId
