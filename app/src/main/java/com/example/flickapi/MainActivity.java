@@ -31,7 +31,7 @@ public class MainActivity extends AppCompatActivity {
                 .build();
         apiFlick = retrofit.create(APIFlick.class);
 
-        Call<ListPhotos> call = apiFlick.getListPhoto(2);
+        Call<ListPhotos> call = apiFlick.getListPhoto();
         call.enqueue(new Callback<ListPhotos>() {
             @Override
             public void onResponse(Call<ListPhotos> call, Response<ListPhotos> response) {
