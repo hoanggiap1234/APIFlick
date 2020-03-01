@@ -3,10 +3,8 @@ package com.example.flickapi;
 import android.os.Bundle;
 import android.widget.TextView;
 
-import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import retrofit2.Call;
@@ -31,17 +29,17 @@ public class MainActivity extends AppCompatActivity {
                 .build();
         apiFlick = retrofit.create(APIFlick.class);
 
-        Call<ListPhotos> call = apiFlick.getListPhoto();
-        call.enqueue(new Callback<ListPhotos>() {
+        Call<PhotoWrapper> call = apiFlick.getListPhoto();
+        call.enqueue(new Callback<PhotoWrapper>() {
             @Override
-            public void onResponse(Call<ListPhotos> call, Response<ListPhotos> response) {
+            public void onResponse(Call<PhotoWrapper> call, Response<PhotoWrapper> response) {
                 if (!response.isSuccessful()) {
                     mTextView.setText("code: " + response.code());
                     return;
                 } else {
-                    ListPhotos listPhoto = response.body();
-                    List<ListPhotos.Photo> photos = listPhoto.photo;
-                    for (ListPhotos.Photo photo : photos) {
+                    PhotoWrapper photoWrapper = response.body();
+                    List<Photo> photos = photoWrapper.photoDetail.photo;
+                    for (Photo photo : photos) {
                         String urlPhoto = "https://farm" + photo.farmId + ".staticflickr.com/"
                                 + photo.serverId + "/" + photo.photoId
                                 + "_" + photo.secretId + ".jpg" + "\n";
@@ -50,7 +48,7 @@ public class MainActivity extends AppCompatActivity {
                 }
             }
             @Override
-            public void onFailure(Call<ListPhotos> call, Throwable t) {
+            public void onFailure(Call<PhotoWrapper> call, Throwable t) {
                 mTextView.setText(t.getMessage());
             }
         });
