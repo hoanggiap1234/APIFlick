@@ -29,15 +29,15 @@ public class MainActivity extends AppCompatActivity {
                 .build();
         apiFlick = retrofit.create(APIFlick.class);
 
-        Call<PhotoWrapper> call = apiFlick.getListPhoto();
-        call.enqueue(new Callback<PhotoWrapper>() {
+        Call<PhotoWrapperDTO> call = apiFlick.getListPhoto();
+        call.enqueue(new Callback<PhotoWrapperDTO>() {
             @Override
-            public void onResponse(Call<PhotoWrapper> call, Response<PhotoWrapper> response) {
+            public void onResponse(Call<PhotoWrapperDTO> call, Response<PhotoWrapperDTO> response) {
                 if (!response.isSuccessful()) {
                     mTextView.setText("code: " + response.code());
                     return;
                 } else {
-                    PhotoWrapper photoWrapper = response.body();
+                    PhotoWrapperDTO photoWrapper = response.body();
                     List<Photo> photos = photoWrapper.photoDetail.photo;
                     for (Photo photo : photos) {
                         String urlPhoto = "https://farm" + photo.farmId + ".staticflickr.com/"
@@ -48,7 +48,7 @@ public class MainActivity extends AppCompatActivity {
                 }
             }
             @Override
-            public void onFailure(Call<PhotoWrapper> call, Throwable t) {
+            public void onFailure(Call<PhotoWrapperDTO> call, Throwable t) {
                 mTextView.setText(t.getMessage());
             }
         });

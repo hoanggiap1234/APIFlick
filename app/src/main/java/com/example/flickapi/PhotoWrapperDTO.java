@@ -6,13 +6,11 @@ import com.google.gson.annotations.SerializedName;
 import java.util.ArrayList;
 import java.util.List;
 
-public class PhotoWrapper {
+public class PhotoWrapperDTO {
     @SerializedName("photos")
     @Expose
     PhotoDetail photoDetail;
-
 }
-
 class PhotoDetail {
     @SerializedName("page")
     @Expose
